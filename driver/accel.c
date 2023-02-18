@@ -88,7 +88,7 @@ INLINE void updata_params(ktime_t now)
 int accelerate(int *x, int *y, int *wheel)
 {
 	float delta_x, delta_y, delta_whl, ms, speed, accel_sens, product, motivity;
-    float e = 2.71828f;
+    const float e = 2.71828f;
     static long buffer_x = 0;
     static long buffer_y = 0;
     static long buffer_whl = 0;
