@@ -1,5 +1,6 @@
-// Maximum number of packets allowed to be sent from the mouse at once. Linux's default value is 8, which at
-// least causes EOVERFLOW for my mouse (SteelSeries Rival 600). Increase this, if 'dmesg -w' tells you to!
+// Maximum number of packets allowed to be sent from the mouse at once. Linux's
+// default value is 8, which at least causes EOVERFLOW for my mouse (SteelSeries
+// Rival 600). Increase this, if 'dmesg -w' tells you to!
 #define BUFFER_SIZE 16
 
 /*
@@ -11,7 +12,8 @@
 // Changes behaviour of the scroll-wheel. Default is 3.0f
 #define SCROLLS_PER_TICK 3.0f
 
-// Emulate Windows' "Enhanced Pointer Precision" for my mouse (1000 Hz) by approximating it with a linear accel
+// Emulate Windows' "Enhanced Pointer Precision" for my mouse (1000 Hz) by
+// approximating it with a linear accel
 #define SENSITIVITY 0.85f
 #define ACCELERATION 0.26f
 #define SENS_CAP 4.0f
