@@ -22,7 +22,7 @@ clean: driver_clean
 driver:
 	@echo -e "\n::\033[32m Compiling leetmouse kernel module\033[0m"
 	@echo "========================================"
-	cp -n $(DRIVERDIR)/config.sample.h $(DRIVERDIR)/config.h
+	#cp -n $(DRIVERDIR)/config.sample.h $(DRIVERDIR)/config.h
 	$(MAKE) -C $(KERNELDIR) M=$(DRIVERDIR) modules
 
 
