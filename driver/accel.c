@@ -8,7 +8,7 @@
 #include <linux/string.h> //strlen
 #include <linux/time.h>
 #include <linux/init.h>
-#include <fixedptc.h>
+#include "fixedptc.h"
 
 // Needed for kernel_fpu_begin/end
 #include <linux/version.h>
@@ -33,7 +33,7 @@ MODULE_AUTHOR(
 // to this module (must be individually parsed via atof() - available in util.c)
 #define PARAM_F(param, default, desc)              \
   fixedpt g_##param = default;			                                       \
-  static char *g_param_##param = "";		                                   \
+  static char *g_param_##param = s(default);		                           \
   module_param_named(param, g_param_##param, charp, 0644);                     \
   MODULE_PARM_DESC(param, desc);
 
@@ -105,15 +105,15 @@ INLINE void update_params(ktime_t now) {
 // ########## Acceleration code
 
 // Acceleration happens here
-int accelerate(int *x, int *y, int *wheel) {
-  fixedpt delta_x, delta_y, delta_whl, ms, speed, accel_sens, product, motivity;
+void accelerate(int *x, int *y, int *wheel) {
+  fixedpt delta_x, delta_y, delta_whl, ms, speed, accel_sens;
+  // fixedpt product, motivity; // Used for mode 3
   static fixedpt carry_x = fixedpt_rconst(0.0);
   static fixedpt carry_y = fixedpt_rconst(0.0);
   static fixedpt carry_whl = fixedpt_rconst(0.0);
   static fixedpt last_ms = fixedpt_rconst(1.0);
   static ktime_t last;
   ktime_t now;
-  int status = 0;
   
   accel_sens = g_Sensitivity;
 
@@ -158,16 +158,16 @@ int accelerate(int *x, int *y, int *wheel) {
     // Linear acceleration
     if (g_AccelerationMode == 1) {
       // Speed * Acceleration
-      speed = fixedpt_mult(speed, g_Acceleration);
+      speed = fixedpt_mul(speed, g_Acceleration);
       speed = fixedpt_add(speed, fixedpt_rconst(1.0));
     }
 
     // Classic acceleration
     if (g_AccelerationMode == 2) {
       // (Speed * Acceleration)^Exponent
-      speed = fixedpt_mult(speed, g_Acceleration);
+      speed = fixedpt_mul(speed, g_Acceleration);
       speed = fixedpt_add(speed, fixedpt_rconst(1.0));
-	  fixedpt_pow(speed, g_Exponent)
+	  fixedpt_pow(speed, g_Exponent);
     }
 
     // Motivity (Sigmoid function)
@@ -204,3 +204,4 @@ int accelerate(int *x, int *y, int *wheel) {
   carry_x = fixedpt_sub(delta_x, fixedpt_fromint(*x));
   carry_y = fixedpt_sub(delta_y, fixedpt_fromint(*y));
   carry_whl = fixedpt_sub(delta_whl, fixedpt_fromint(*wheel));
+}
