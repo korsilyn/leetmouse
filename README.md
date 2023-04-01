@@ -1,5 +1,7 @@
 * Description
-  This fork of fork fork =LEETMOUSE= by chilliams, systemofapwne and Skyl3r merges fixes from systemofapwne into Skyl3r version, because looks like Skyl3r version is dead and he is not accepting MR. Here is only "Linear acceleration", that works like in RawAccel.
+  This fork of =LEETMOUSE= by korsilyn, chilliams and systemofapwne adds in Classic acceleration, a sigmoid function acceleration and changes the functionality of sensitivity to behave more like RawAccel. Below are the changes from this fork:
+   * Moved to fixedptc.h - No more mouse lag, like in both forks of leetmouse
+   * Compiling on latest kernel
    * Pre Scale is removed
    * Post Scale is removed
    * Sensitivity is made to behave more like RawAccel (post calculation multiplier, like Post Scale)
