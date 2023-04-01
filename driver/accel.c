@@ -188,12 +188,12 @@ void accelerate(int *x, int *y, int *wheel) {
 
   // Like RawAccel, sensitivity will be a final multiplier:
   delta_x = fixedpt_mul(delta_x, g_Sensitivity);
-  delta_y = fixedpt_mul(delta_x, g_Sensitivity);
+  delta_y = fixedpt_mul(delta_y, g_Sensitivity);
 
   delta_x = fixedpt_add(delta_x, carry_x);
   delta_y = fixedpt_add(delta_y, carry_y);
 
-  delta_whl *= fixedpt_mul(delta_whl, fixedpt_div(g_ScrollsPerTick, fixedpt_rconst(3.0)));
+  delta_whl = fixedpt_mul(delta_whl, fixedpt_div(g_ScrollsPerTick, fixedpt_rconst(3.0)));
 
   // Cast back to int
   *x = fixedpt_toint(delta_x);
