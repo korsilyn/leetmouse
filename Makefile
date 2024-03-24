@@ -11,7 +11,7 @@ DRIVERDIR?=$(shell pwd)/driver
 MODULEDIR?=/lib/modules/$(shell uname -r)/kernel/drivers/usb
 
 DKMS_NAME?=leetmouse-driver
-DKMS_VER?=0.10.0
+DKMS_VER?=0.10.1
 
 
 .PHONY: driver
