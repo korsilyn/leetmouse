@@ -3,7 +3,7 @@
 # TODO This proof-of-concept bind script will be replaced by a more mainstreamed udev rule in the near future.
 
 # Home PC
-DEVICES=( "5-1.1:1.1" )
+DEVICES=( "1-3:1.0" )
 # Office PC
 #DEVICES=( "2-1.3.4:1.1" )
 # Lab PC
